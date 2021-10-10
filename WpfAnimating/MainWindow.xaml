@@ -1,0 +1,54 @@
+﻿<Window x:Class="WpfAnimating.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAnimating"
+        xmlns:h="clr-namespace:WpfAnimating.ViewHelpers"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" x:Name="me">
+    <Window.Resources>
+        <h:MathConverter x:Key="mathConverter"/>
+    </Window.Resources>
+    <Grid>
+        <local:AnimatedContentControl x:Name="animatedContent" Content="{Binding Items/, ElementName=listBox}">
+            <local:AnimatedContentControl.InStoryboard>
+                <Storyboard Duration="0:0:2">
+                    <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="Opacity"/>
+                    <DoubleAnimation From="0.5" To="1" Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"/>
+                    <DoubleAnimation From="0.5" To="1" Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"/>
+                    <DoubleAnimation From="970" To="0" Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[3].(TranslateTransform.X)"/>
+                </Storyboard>
+            </local:AnimatedContentControl.InStoryboard>
+            <local:AnimatedContentControl.OutStoryboard>
+                <Storyboard Duration="0:0:2">
+                    <DoubleAnimation To="0" Storyboard.TargetProperty="Opacity"/>
+                    <DoubleAnimation To="0.5" Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"/>
+                    <DoubleAnimation To="0.5" Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"/>
+                    <DoubleAnimation To="-970" Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[3].(TranslateTransform.X)"/>
+                </Storyboard>
+            </local:AnimatedContentControl.OutStoryboard>
+        </local:AnimatedContentControl>
+        <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+            <ListBox x:Name="listBox">
+                <ListBox.Items>
+                    <ListBoxItem>1</ListBoxItem>
+                    <ListBoxItem>2</ListBoxItem>
+                    <ListBoxItem>3</ListBoxItem>
+                    <ListBoxItem>4</ListBoxItem>
+                    <ListBoxItem>5</ListBoxItem>
+                    <ListBoxItem>6</ListBoxItem>
+                    <ListBoxItem>7</ListBoxItem>
+                    <ListBoxItem>8</ListBoxItem>
+                    <ListBoxItem>9</ListBoxItem>
+                    <ListBoxItem>10</ListBoxItem>
+                </ListBox.Items>
+            </ListBox>
+            <Button Click="Button_Click" 
+                Padding="10,5">
+                ClickMe
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
